@@ -24,12 +24,15 @@ function toggleSidebar() {
 function itemsSelecionados(itemId) {
     const precoElemento = document.getElementById(`preco-${itemId}`);
     const nomeElemento = document.getElementById(`nome-${itemId}`);
+    const imgElemento = document.querySelector(`#option-img-${itemId}`)
 
     let pedidoPreco = parseFloat(precoElemento.innerText.replace("R$", "").replace(",", ".").trim());
     let pedidoNome = nomeElemento.innerText.trim();
+    let pedidoImg = imgElemento.getAttribute('src');
 
     const cardapioItem = {
         id: itemId,
+        imagem: pedidoImg,
         nome: pedidoNome,
         preco: pedidoPreco,
         quantidade: 1
@@ -57,10 +60,6 @@ function listaPedidos() {
 
     pedidosConatiner.innerHTML = '';
 
-    const pedidosImagens = {
-        'item1': '/images/Rodizio-Chopp.png'
-    };
-
     if (pedidos.length === 0) {
         document.getElementById("sidebar").style.right = "-480px";
         document.getElementById("fechar-sidebar-btn").style.right = "-50px";
@@ -79,7 +78,7 @@ function listaPedidos() {
         <div class="img-nome-quantidade-wrapper">
             <div class="pedido-img">
                 <picture>
-                    <img src="${pedidosImagens[pedido.id]}" alt="${pedido.nome}" id="img-pedido">
+                    <img src="${pedido.imagem}" alt="${pedido.nome}" id="img-pedido-${pedido.id}" class="img-pedido">
                 </picture>
             </div>
             <div class="pedidos-nome">

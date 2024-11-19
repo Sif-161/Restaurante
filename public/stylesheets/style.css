@@ -52,7 +52,6 @@
 }
 
 #title title-text{
-  font-family: 'Trade Gothic LT Std', sans-serif;
   font-size: 50px;
   line-height: 60px;
 }
@@ -113,6 +112,10 @@ a{
   font-weight: 700;
 }
 
+#menu-name.active{
+  text-decoration: underline;
+}
+
 .container-options{
   margin: 0px 75px 0px 75px;
   padding: 0px 24px 0px 24px;
@@ -124,6 +127,9 @@ a{
 
 .option-wrap{
   display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  padding: 10px;
 }
 
 .option-item{
@@ -133,6 +139,7 @@ a{
 }
 
 .option-item-wrap{
+  justify-items: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,9 +147,9 @@ a{
   margin-bottom: 20px;
 }
 
-#option-img{
+.option-img{
   margin-top: 10px;
-  width: 170px;
+  width: 150px;
   height: auto;
   border-radius: 30px;
 }
@@ -160,6 +167,7 @@ a{
 }
 
 #option-item-btn{
+  text-align: center;
   background-color: rgba(167, 1, 1, 0.932);
   border: none;
   color: white;
