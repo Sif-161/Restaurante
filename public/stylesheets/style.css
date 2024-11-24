@@ -175,8 +175,10 @@ a{
   width: 100px;
   cursor: pointer;
   padding: 10px 0px 10px 0px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #option-item-btn:hover{
   background-color: rgba(167, 1, 1, 0.56);
+  transform: scale(1.05);
 }

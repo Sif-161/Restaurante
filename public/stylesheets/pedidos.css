@@ -153,6 +153,12 @@
     font-size: 15px;
     cursor: pointer;
     color: rgb(167, 1, 1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#remover:hover{
+    transform: scale(1.05);
+    cursor: pointer; 
 }
 
 .total-finalizar-wrapper {
@@ -182,6 +188,13 @@
     cursor: pointer;
     color: white;
     font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+btn-continuar:hover{
+    background-color: rgba(167, 1, 1, 0.56);
+    transform: scale(1.05);
+    cursor: pointer;
 }
 
 

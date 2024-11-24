@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <script src="/javascripts/formulario.js"></script>
+    <link rel="stylesheet" href="/stylesheets/formulario.css">
+</head>
+
+<body>
+    <form action="/formulario" method="POST" id="form">
+        <div id="form-container">
+            <div id="form-wrapper">
+                <div class="title-options">
+                    <div id="title">
+                        <h1>Quase lá!</h1>
+                        <h3>Escolha onde você quer receber seu pedido</h3>
+                    </div>
+                    <div id="options">
+                        <select name="options" id="dropdown" onchange="opcaoSelecionada(event)">
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="1" class="options">Restaurante</option>
+                            <option value="2" class="options">Casa</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="form-content"></div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

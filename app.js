@@ -6,11 +6,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-// Firebase Admin SDK
 var admin = require('firebase-admin');
 var serviceAccount = require('./struct-restaurante-firebase-adminsdk-e5lhn-1015d3c6d2.json');
 
-// Inicializar Firebase Admin
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
@@ -28,7 +26,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Passar o Firebase DB para as rotas
 app.use('/', indexRouter(db));
 app.use('/users', usersRouter);
 
