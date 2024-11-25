@@ -100,6 +100,26 @@ module.exports = function (db) {
     }
   })
 
+  //configuração da pagina login
+  router.get('/login', function(req, res, next) {
+    res.render('admin/login', { title: 'Login' });
+  });
+
+  //configuração da pagina pedidos do administrador
+  router.get('/pedidos', function(req, res, next) {
+    res.render('admin/pedidos', { title: 'Pedidos' });
+  });
+  
+  //configuração da pagina reservas do administrador
+  router.get('/reservas', function(req, res, next) {
+    res.render('admin/reservas', { title: 'Reservas' });
+  });
+
+  //configuração da pagina de criação e edição de pedidos do administrador
+  router.get('/crud_pedidos', function(req, res, next) {
+    res.render('admin/crud_pedidos', { title: 'Criação de pedidos' });
+  });
+
   return router;
 };
 
