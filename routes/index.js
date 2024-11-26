@@ -115,10 +115,57 @@ module.exports = function (db) {
     res.render('admin/reservas', { title: 'Reservas' });
   });
 
-  //configuração da pagina de criação e edição de pedidos do administrador
+  //configuração da pagina crud_pedidos para mostrar os itens na tela
   router.get('/crud_pedidos', function(req, res, next) {
-    res.render('admin/crud_pedidos', { title: 'Criação de pedidos' });
+    res.render('admin/crud_pedidos', { title: 'Criação de pedidos'});
   });
+
+  router.get('/crud_pedidos/subcolecoes', async function(req, res, next) {
+    try {
+      const { menu } = req.query;
+
+      if (!menu) {
+        return res.status(400).json({ message: 'Menu não encontrado '});
+      }
+
+      const menusCollection = db.collection('menus');
+      const menuDoc = await menusCollection.doc(menu).get();
+
+      if (!menuDoc.exists) {
+        return res.status(404).json({ message: 'Menu não encontrado' });
+      }
+
+      const subcolecoes = await menuDoc.ref.listCollections();
+      const subcolecoesData = subcolecoes.map(subcolecao => ({
+        subcolecao: subcolecao.id
+      }));
+
+      return res.json({ subcolecoes: subcolecoesData });
+      
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  //configuração da pagina crud_pedidos para adicionar os itens do banco
+  router.post('/crud_pedidos/add', async function (req, res, next){
+    try {
+      const {menuId, subcolecaoId, novoItem} = req.body;
+      
+      const subcolecaoRef = db.collection('menus').doc(menuId).collection(subcolecaoId);
+
+      await subcolecaoRef.add(novoItem);
+
+      res.status(200).json({message: 'Item adicionado com sucesso!'});
+    } catch (error) {
+      next(error);
+    }
+  });
+
+
+  //configuração da pagina crud_pedidos para editar os itens do banco
+
+  //configuração da pagina crud_pedidos para excluir os itens do banco
 
   return router;
 };
