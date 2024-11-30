@@ -115,12 +115,12 @@ module.exports = function (db) {
     res.render('admin/reservas', { title: 'Reservas' });
   });
 
-  //configuração da pagina crud_pedidos para mostrar os itens na tela
-  router.get('/crud_pedidos', function(req, res, next) {
-    res.render('admin/crud_pedidos', { title: 'Criação de pedidos'});
+  //configuração da pagina crud_pratos para mostrar os itens na tela
+  router.get('/crud_pratos', function(req, res, next) {
+    res.render('admin/crud_pratos', { title: 'Criação de pedidos'});
   });
 
-  router.get('/crud_pedidos/subcolecoes', async function(req, res, next) {
+  router.get('/crud_pratos/subcolecoes', async function(req, res, next) {
     try {
       const { menu } = req.query;
 
@@ -136,9 +136,18 @@ module.exports = function (db) {
       }
 
       const subcolecoes = await menuDoc.ref.listCollections();
-      const subcolecoesData = subcolecoes.map(subcolecao => ({
-        subcolecao: subcolecao.id
-      }));
+      const subcolecoesData = {};
+
+      for (const subcolecao of subcolecoes){
+        const documentoSnapshot = await subcolecao.get();
+        const docuemntos = documentoSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        subcolecoesData[subcolecao.id] = docuemntos;
+
+      }
 
       return res.json({ subcolecoes: subcolecoesData });
       
@@ -147,8 +156,8 @@ module.exports = function (db) {
     }
   });
 
-  //configuração da pagina crud_pedidos para adicionar os itens do banco
-  router.post('/crud_pedidos/add', async function (req, res, next){
+  //configuração da pagina crud_pratos para adicionar os itens do banco
+  router.post('/crud_pratos/add', async function (req, res, next){
     try {
       const {menuId, subcolecaoId, novoItem} = req.body;
       
@@ -156,16 +165,60 @@ module.exports = function (db) {
 
       await subcolecaoRef.add(novoItem);
 
-      res.status(200).json({message: 'Item adicionado com sucesso!'});
+      res.status(200).json({ message: 'Item adicionado com sucesso!' });
     } catch (error) {
       next(error);
     }
   });
 
+  //configuração da pagina crud_pratos para editar os itens do banco
+  router.put('/crud_pratos/edit', async function (req, res, next) {
+    try {
+        const { menuId, subcolecaoId, itemId, updatedItem } = req.body;
 
-  //configuração da pagina crud_pedidos para editar os itens do banco
+        console.log('Dados recebidos:', { menuId, subcolecaoId, itemId, updatedItem });
 
-  //configuração da pagina crud_pedidos para excluir os itens do banco
+        if (!menuId || !subcolecaoId || !itemId || !updatedItem) {
+            return res.status(400).json({ message: 'Dados insuficientes para editar o item' });
+        }
+
+        const itemRef = db.collection('menus')
+                          .doc(menuId)
+                          .collection(subcolecaoId)
+                          .doc(itemId);
+
+        const itemDoc = await itemRef.get();
+        if (!itemDoc.exists) {
+            return res.status(404).json({ message: 'Item não encontrado' });
+        }
+
+        await itemRef.update(updatedItem);
+
+        console.log('Item atualizado com sucesso!');
+        res.status(200).json({ message: 'Item atualizado com sucesso' });
+    } catch (error) {
+        console.error('Erro no servidor:', error);
+        res.status(500).json({ message: 'Erro interno no servidor', error: error.message, stack: error.stack });
+
+    }
+  });
+
+  //configuração da pagina crud_pratos para excluir os itens do banco
+  router.delete('/crud_pratos/delete', async function (req, res, next) {
+    try {
+      const { menuId, subcolecaoId, itemId } = req.body;
+      const itemRef = db.collection('menus')
+                        .doc(menuId)
+                        .collection(subcolecaoId)
+                        .doc(itemId);
+      
+      await itemRef.delete();
+
+      res.status(200).json({ massage: 'Item excluido com sucesso!' });
+    } catch (error) {
+      next(error);
+    }
+  });
 
   return router;
 };
