@@ -150,12 +150,7 @@ module.exports = function (db) {
       console.error('Erro ao atualizar o status do pedido');
       res.status(500).json({ message: 'Erro ao atualizar o status do pedido'});
     }
-  });
-  
-  //configuração da pagina reservas do administrador
-  router.get('/reservas', function(req, res, next) {
-    res.render('admin/reservas', { title: 'Reservas' });
-  });
+  }); 
 
   //configuração da pagina crud_pratos para mostrar os itens na tela
   router.get('/crud_pratos', function(req, res, next) {

@@ -1,3 +1,7 @@
+body{
+  font-family: 'Gothic A1', sans-serif;
+}
+
 .nav-wrapper{
   display: flex;
   justify-content: space-between;
@@ -21,13 +25,16 @@
   font-size: 16px;
   text-transform: uppercase;
   vertical-align: baseline;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
 
 .content-text{
   text-align: center;
   margin: 20px 0px 50px;
   padding: 137px 0px 50px;
   position: relative;
+  color: rgb(167, 1, 1);
 }
 
 .content-text::before{
