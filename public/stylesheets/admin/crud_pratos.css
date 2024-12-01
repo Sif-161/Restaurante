@@ -1,3 +1,38 @@
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto; 
+    width: 250px;
+}
+
+.sidebar-logo {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+#options{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#options:focus{
+    border-color: rgb(167, 1, 1);
+    outline: none;
+}
+
 .options-content {
     position: relative;
 }
@@ -98,7 +133,7 @@
 .campo input[type="text"]:focus,
 .campo input[type="number"]:focus,
 .campo input[type="url"]:focus,
-.campo select:focus {
+.campo select:focus{
     border-color: rgb(167, 1, 1);
     outline: none;
 }

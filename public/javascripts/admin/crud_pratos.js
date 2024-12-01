@@ -330,7 +330,10 @@ async function addNovoItem(){
 
         let imagem = imagemBase64 || imagemLink || undefined;
 
-        const response = await fetch('/crud_pedidos/add', {
+        if(!nome) throw new Error("O campo 'Nome' é obrigatorio.");
+        if(!preco) throw new Error("O campo 'Preço' é obrigatorio.");
+
+        const response = await fetch('/crud_pratos/add', {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
@@ -505,8 +508,6 @@ function mostrarModal(content, tipo, menuId, subcolecaoId, itemId, itemDiv){
         if (confirmButton) {
             confirmButton.onclick = () => {
                 excluirItem(menuId, subcolecaoId, itemId, itemDiv, modal);
-                modal.style.display = 'none';
-                modal.remove();
             };
         }
     }else if (tipo === 'editar'){

@@ -1,0 +1,16 @@
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto; 
+    width: 250px;
+}
+
+.sidebar-logo {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 20px;
+}

@@ -51,9 +51,11 @@ async function enviarPedido(){
 
         const pedido = {
             nome,
-            mesa: mesa || null,
-            endereco: endereco || null,
-            itensId: items.map(item => item.id)
+            mesa: `mesa: ${mesa || undefined}`,
+            endereco: endereco || undefined,
+            itensNome: items.map(item => item.nome),
+            status: 'novo pedido',
+            qtd: items.map(item => item.quantidade)
         };
 
         const response = await fetch('/formulario', {

@@ -109,6 +109,48 @@ module.exports = function (db) {
   router.get('/pedidos', function(req, res, next) {
     res.render('admin/pedidos', { title: 'Pedidos' });
   });
+
+  router.get('/pedidos/load', async function(req, res, next) {
+    try {
+      const pedidosSnapshot = await await db.collection('pedidos').get();
+
+      const pedidos = pedidosSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      
+      res.json(pedidos);
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  router.put('/pedidos/:id/atualizar', async (req, res) => {
+    const pedidoId = req.params.id;
+    const novoStatus = req.body.status;
+
+    try {
+      const pedidoRef = db.collection('pedidos').doc(pedidoId);
+      const pedido = await pedidoRef.get();
+
+      if(!pedido.exists){
+        return res.status(404).json({ message: 'Pedido não encontrado '});
+      }
+
+      await pedidoRef.update({ status: novoStatus});
+      
+      const updatedPedido = {
+        id: pedidoId,
+        ...pedido.data(),
+        status: novoStatus
+      };
+      res.json(pedido);
+
+    } catch (error) {
+      console.error('Erro ao atualizar o status do pedido');
+      res.status(500).json({ message: 'Erro ao atualizar o status do pedido'});
+    }
+  });
   
   //configuração da pagina reservas do administrador
   router.get('/reservas', function(req, res, next) {

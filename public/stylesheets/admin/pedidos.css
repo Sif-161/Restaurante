@@ -1,0 +1,117 @@
+.sidebar{
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto; 
+    width: 250px;
+}
+
+.sidebar-logo{
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.main-content{
+    margin-left: 250px;
+    padding: 20px;
+}
+
+#pedidos-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#pedidos-table th, #pedidos-table td{
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+#pedidos-table th:last-child, #pedidos-table td:last-child{
+    border-right: none;
+}
+
+
+#pedidos-table th{
+    background-color: #343a40;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#pedidos-table td:nth-child(5){
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.status-novo {
+    background-color: #d1ecf1;
+}
+
+.status-em-preparacao {
+    background-color: #fff3cd;
+}
+
+.status-pronto {
+    background-color: #d4edda;
+}
+
+.status-cancelado {
+    background-color: #f8d7da;
+}
+
+.status-aguardando {
+    background-color: #e2e3e5;
+}
+
+.status-select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-align-last: center;
+}
+
+.status-select:focus {
+    outline: none;
+    border-color: #007bff; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.status-select option {
+    background-color: #fff;
+    color: #333;
+}
+
+
+.status-select {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+
+#pedidos-table td select {
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.pedido-item, .pedido-qtd {
+    line-height: 1.8; 
+}
+
+#pedidos-table td br {
+    margin-bottom: 8px; 
+}
