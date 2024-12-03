@@ -7,7 +7,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var admin = require('firebase-admin');
-var serviceAccount = require('./struct-restaurante-firebase-adminsdk-e5lhn-1015d3c6d2.json');
+var serviceAccount = require('./struct-restaurante-firebase-adminsdk-e5lhn-3b76f623b9.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
